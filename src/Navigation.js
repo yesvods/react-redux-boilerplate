@@ -1,7 +1,5 @@
-import react from 'react';
-
 export default
-class extends react.Component {
+class extends React.Component {
   render(){
     return (
 <ul>
