@@ -12,12 +12,15 @@ gulp.task('dev', () => {
   let webpackConfig = require('./webpack.config.js');
   let devServerOption = {
     publicPath: webpackConfig.output.publicPath,
-    quiet: true,
-    noInfo: true,
+    // quiet: true,
+    // noInfo: true,
     hot: true,
     inline: true,
     lazy: false,
     historyApiFallback: true,
+    stats: {
+      colors: true
+    }
   }
 
   let compiler = webpack(webpackConfig, (err, stats) => {

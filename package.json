@@ -10,22 +10,25 @@
   "author": "Jogis",
   "license": "MIT",
   "babel": {
-    "presets": [
-      "react",
-      "es2015",
-      "stage-0"
-    ]
+    "cacheDirectory": true,
+    "presets": ["react", "es2015", "stage-0"]
   },
   "dependencies": {
+    "animate.css": "^3.4.0",
     "classnames": "^2.2.0",
+    "font-awesome": "^4.4.0",
     "history": "^1.13.1",
     "lodash": "^3.10.1",
     "material-ui": "^0.13.2",
+    "normalize.css": "^3.0.3",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
+    "react-redux": "^4.0.0",
     "react-router": "^1.0.0",
     "react-tap-event-plugin": "^0.2.1",
     "redux": "^3.0.4",
+    "redux-localstorage": "^0.4.0",
+    "redux-localstorage-filter": "^0.1.1",
     "redux-thunk": "^1.0.0",
     "whatwg-fetch": "^0.10.1"
   },

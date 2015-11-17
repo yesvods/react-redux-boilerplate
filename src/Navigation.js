@@ -1,24 +1,17 @@
+import {Link} from 'react-router';
+import style from './Navigation.scss';
 export default
 class extends React.Component {
   render(){
     return (
-<ul>
-  <a href="">
+<div>
+<ul className={style.navUl}>
+  <Link to="/demo">
     <li>1</li>
-  </a>
-  <a href="">
-    <li>2</li>
-  </a>
-  <a href="">
-    <li>3</li>
-  </a>
-  <a href="">
-    <li>4</li>
-  </a>
-  <a href="">
-    <li>5</li>
-  </a>
+  </Link>
 </ul>
+{this.props.children}
+</div>
 )
   }
 }

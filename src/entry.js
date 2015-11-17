@@ -12,6 +12,7 @@ let routes = (
   <Router history={history}>
     <Route path="/" component={Navigation} >
       <IndexRoute component={Demo}/>
+      <Route path="demo" component={Demo}></Route>
     </Route>
   </Router>
 )

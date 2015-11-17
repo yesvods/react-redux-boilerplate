@@ -1,0 +1,26 @@
+:global html,:global body {
+  margin: 0;padding: 0;
+}
+.navUl {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  background: #fafafa;
+  color: #444444;
+  width: 100%;
+}
+.navUl>a {
+  text-decoration: none;
+}
+.navUl>a>li {
+  list-style-type: none;
+  padding: 5px 10px;
+  text-align: center;
+  margin-right: 2px;
+  &:hover {
+    background: #999999;
+  }
+  &:active {
+    color: #fff;
+  }
+}

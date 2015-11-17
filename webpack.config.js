@@ -23,6 +23,7 @@ module.exports = {
       'node_modules'
     ]
   },
+  devtool: "eval-source-map",
   module: {
     loaders: [
       {
