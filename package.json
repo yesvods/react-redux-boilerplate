@@ -1,0 +1,14 @@
+{
+  "name": "react-redux-erp-boilpalte",
+  "version": "0.0.1",
+  "description": "A boilerplat for react-redux boilerplate",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jogis",
+  "license": "MIT",
+  "dependencies": {
+    "classnames": "^2.2.0"
+  }
+}
