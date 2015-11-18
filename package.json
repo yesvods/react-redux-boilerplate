@@ -1,6 +1,6 @@
 {
   "name": "react-redux-erp-boilpalte",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A boilerplat for react-redux boilerplate",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,6 @@
     "presets": ["react", "es2015", "stage-0"]
   },
   "dependencies": {
-    "animate.css": "^3.4.0",
     "classnames": "^2.2.0",
     "font-awesome": "^4.4.0",
     "history": "^1.13.1",

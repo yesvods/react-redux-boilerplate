@@ -1,7 +1,14 @@
+//third part lib
 import Router, { Route, IndexRoute } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory'
-import Navigation from './Navigation';
 import ReactDOM from 'react-dom';
+
+//common style
+import 'normalize.css';
+import 'font-awesome/css/font-awesome.css';
+
+//custom components
+import Navigation from './Navigation';
 import Demo from './components/demo';
 
 /**

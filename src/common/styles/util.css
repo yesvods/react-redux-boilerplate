@@ -1,0 +1,16 @@
+.fleft{float:left;}
+.fright{float:right;}
+
+.text-left{text-align:left}
+.text-right{text-align:right}
+.text-center{text-align:center}
+
+.show{
+  display: block !important;
+}
+.hide,.dpn{
+  display: none !important;
+}
+.clearfix{
+  clear: both;
+}
