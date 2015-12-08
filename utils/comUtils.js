@@ -1,13 +1,16 @@
 import Tether from 'tether';
+import _ from 'lodash';
+
 class PopCom extends React.Component {
   constructor(){
     super();
     this.state = {};
   }
   componentDidMount() {
-    let { attachment, justify, target } =  this.props.config;
+    let { attachment, justify, target, blur, onBlur, autoClose } =  this.props.config;
+    let comDOM = ReactDOM.findDOMNode(this.refs.body);
     let tetherConfig = {
-      element: ReactDOM.findDOMNode(this.refs.body),
+      element: comDOM,
       target,
       constraints: [{
         to: 'window',
@@ -94,10 +97,19 @@ class PopCom extends React.Component {
       ...tetherConfig,
       ...attachmentConfig,
     }
+    //挂载弹出框位置
     let tether = new Tether(tetherConfig);
     this.setState({
       tether
     });
+    //添加blur事件
+    if(blur){
+      addBlur([comDOM, target], e => {
+        //调用blur回调函数
+        onBlur(e, this.props.close);
+        if(autoClose) return this.props.close();
+      })
+    }
   }
   componentWillUnmount() {
     this.state.tether.destroy();
@@ -119,16 +131,18 @@ class PopCom extends React.Component {
  *    用户点击其他位置导致弹出框消息,close函数也会被调用
  *
  * @param config 配置参数
- * target: 真实DOM，相对位置的DOM
- * justify: 类似windows右键菜单，让菜单尽量在可视窗口弹出
- * attachment: 相对位置,12个可选值: top/right/bottom/left/tl/tr/rt/rb/bl/br/lt/lb
+ *    @param {DOM} target: 真实DOM，相对位置的DOM
+ *    @param {Boolean} justify 类似windows右键菜单，让菜单尽量在可视窗口弹出
+ *    @param {String} attachment 相对位置,12个可选值: 
+ *      top/right/bottom/left/tl/tr/rt/rb/bl/br/lt/lb
+ *    @param {Boolean} blur 是否绑定blur事件 true
+ *    @param {Function} onBlur blur回调函数： (e, close) => { ... }
+ *    @param {Boolean} autoClose 是否触发blur事件后关闭
+ *    
  *    
  * @param  cb 弹出组件的回调函数
- *  有三个Hook事件：
- *  change/end/close
- *
- * Notification:
- * 调用pop('hide')关闭pop组件不会触发close事件
+ *    有三个Hook事件：
+ *    change/end/close
  *
  * example：
  * pop(<CustomComponent/>, {
@@ -137,18 +151,25 @@ class PopCom extends React.Component {
       justify: true,
  * }, (eventName, value) => {})
  */
-export function pop(body, config = {
-  justify: true,
-}, cb = function(){}){
+export function pop(body, config, cb = function(){}){
   let mountedDOM = document.getElementById('pop');
-  if(_.isString(body) && body === 'hide'){
-    ReactDOM.unmountComponentAtNode(mountedDOM)
-    return;
+  config = {
+    justify: true,
+    blur: false,
+    onBlur: function(){},
+    autoClose: true,
+    ...config,
   }
+
+  // if(_.isString(body) && body === 'hide'){
+  //   ReactDOM.unmountComponentAtNode(mountedDOM)
+  //   return;
+  // }
   //in case #pop没有被加入
   if(!mountedDOM){
     let div = document.createElement('div');
-    mountedDOM = document.body.appendChild(div);
+    div.setAttribute('id', 'pop');
+    mountedDOM = document.body.appendChild(div)
   }
   if(!config) throw new Error('调用pop函数时，第二个参数要添加配置');
 
@@ -166,4 +187,43 @@ export function pop(body, config = {
     change={_change} end={_end} close={_close} config={config}
     body={body}>
     </PopCom>, mountedDOM);
+}
+
+/**
+ * 绑定doms的onBlur事件
+ * @param {Array}   doms 被绑定blur事件的doms
+ * @param {Function} cb   blur触发回调函数
+ * @param {Boolean}   once 事件被触发一次后就被移除(默认true)
+ * @return {Function} 移除监听的hook函数，调用后blur处理函数被移除
+ */
+export function addBlur(doms, cb, once){
+  if(doms && !(doms instanceof Array))
+    doms = [doms];
+  doms.forEach(dom => {
+    if(!_.isElement(dom)){
+      throw new Error(`${dom} is not an Element`);
+    }
+  })
+  if(once !== true && once !== false)
+    once = true;
+  function _innerRemoveCallBack(){
+    window.removeEventListener('click', _innerClickCallBack, true);
+  }
+  function _innerClickCallBack(e){
+    var flag = false;
+    doms.forEach(function(dom){
+      if(dom.contains(e.target)){
+        flag = true;
+        return;
+      }
+    })
+    if(!flag){
+      cb(e);
+      if(once){
+        _innerRemoveCallBack();
+      }
+    }
+  }
+  window.addEventListener('click', _innerClickCallBack, true);
+  return _innerRemoveCallBack;
 }
