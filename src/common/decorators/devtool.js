@@ -1,6 +1,6 @@
 import Devtool from 'common/utils/Devtool';
 
-export default (Component, store) => class extends React.Component {
+export default Component => class extends React.Component {
   constructor() {
     super()
   }
@@ -8,7 +8,7 @@ export default (Component, store) => class extends React.Component {
   render() {
     return (
       <Component>
-        { config.devtool && <Devtool store={store} /> }
+        { config.devtool && <Devtool /> }
       </Component>
     )
   }
