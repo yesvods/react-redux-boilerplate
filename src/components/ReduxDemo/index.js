@@ -6,7 +6,8 @@ import rootReducers from './reducers'
 
 const store = createStoreWithMiddleware()(rootReducers) 
 
-// export default
+@devtool(ReduxDemo, store)
+export default
 class ReduxDemo extends Component {
   render(){
     return (
@@ -19,5 +20,3 @@ class ReduxDemo extends Component {
 )
   }
 }
-
-export default devtool(ReduxDemo, store);
