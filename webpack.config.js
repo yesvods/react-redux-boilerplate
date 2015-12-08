@@ -15,7 +15,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: `http://${config.host}:${config.clientPort}/build/`,
+    publicPath: `/build/`,
   },
   resolve: {
     extensions: ["", ".js", ".jsx", ".json"],
