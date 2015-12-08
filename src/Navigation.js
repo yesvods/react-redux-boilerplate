@@ -6,9 +6,16 @@ class extends React.Component {
     return (
 <div>
 <ul className={style.navUl}>
-  <Link to="/demo">
-    <li>1</li>
-  </Link>
+  <li>
+    <Link to="/demo" className="link">
+      demo
+    </Link>
+  </li>
+  <li>
+    <Link to="/redux" className="link">
+      redux
+    </Link>
+  </li>
 </ul>
 {this.props.children}
 </div>
