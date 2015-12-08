@@ -7,6 +7,7 @@
 import gulp from 'gulp';
 import webpack from 'webpack';
 import WebpackDevSever from 'webpack-dev-server';
+import config from './config';
 
 gulp.task('dev', () => {
   let webpackConfig = require('./webpack.config.js');
@@ -31,9 +32,9 @@ gulp.task('dev', () => {
 
   let webpackDevServer = new WebpackDevSever(compiler, devServerOption);
 
-  webpackDevServer.listen(8888, '0.0.0.0', err => {
+  webpackDevServer.listen(config.clientPort, config.host, err => {
     if(err)
       console.error(err);
-    console.info('==> 🚧  Webpack development server listening on %s:%s', '0.0.0.0', 8888);
+    console.info(`==> 🚧  Webpack development server listening on %s:%s`, config.host, config.clientPort);
   })
 })
