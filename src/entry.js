@@ -10,6 +10,8 @@ import 'font-awesome/css/font-awesome.css';
 //custom components
 import Navigation from './Navigation';
 import Demo from './components/demo';
+import ReduxDemo from './components/ReduxDemo';
+
 
 /**
  * routes navgation information
@@ -19,7 +21,8 @@ let routes = (
   <Router history={history}>
     <Route path="/" component={Navigation} >
       <IndexRoute component={Demo}/>
-      <Route path="demo" component={Demo}></Route>
+      <Route path="demo" component={Demo} />
+      <Route path="redux" component={ReduxDemo} />
     </Route>
   </Router>
 )

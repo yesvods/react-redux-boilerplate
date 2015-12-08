@@ -9,5 +9,6 @@ module.exports = {
     "React": "react",
     "ReactDOM": "react-dom",
     "_": "lodash",            //functional program library
+    "config": path.join(__dirname,'config'),
   }
 }
