@@ -2,13 +2,13 @@ import webpack from 'webpack'
 import path from 'path'
 import config from './config';
 import pathResolve from './path-resolve.js';
+import notifyStats from './notifyStats';
 
 
 module.exports = {
   entry: {
     bundle: [
-      `webpack-dev-server/client?http://${config.host}:${config.clientPort}`,
-      'webpack/hot/only-dev-server',
+      `webpack-hot-middleware/client?http://${config.host}:${config.clientPort}`,
       './src/entry.js',
     ]
   },
@@ -25,13 +25,13 @@ module.exports = {
     ],
     alias: pathResolve.alias,
   },
-  devtool: "eval-source-map",
+  devtool: "cheap-module-eval-source-map",
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
-        loader: 'react-hot!babel'
+        loader: 'babel'
       },
       {test: /\.json$/, loader: 'json'},
       { test: /\.s[c|a]ss$/, loader: 'style!css?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]!sass'},
@@ -43,6 +43,10 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin(pathResolve.globalDependencies),
+    function () {
+      this.plugin('done', notifyStats);
+    },
   ]
 }
