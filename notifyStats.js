@@ -1,3 +1,12 @@
+function notifyError(error) {
+  // BELLs when something goes wrong!
+  console.log("\x07" + error);
+}
+
+function notifyWarning(warning) {
+  console.log(warning);
+}
+
 module.exports = function notifyStats(stats) {
   var json = stats.toJson();
   if (json.errors.length > 0) {
