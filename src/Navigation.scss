@@ -6,7 +6,7 @@
   margin: 0;
   display: flex;
   background: #fafafa;
-  color: #444444;
+  color: #000;
   width: 100%;
   list-style: none;
   height: 50px;
@@ -14,7 +14,11 @@
 .navUl>li>a {
   text-decoration: none;
   display: block;
+  color: #000;
   padding: 0px 10px;
+}
+.navUl>li:active>a {
+  color: #fafafa;
 }
 .navUl>li {
   list-style-type: none;
@@ -23,8 +27,5 @@
   line-height: 50px;
   &:hover {
     background: #999999;
-  }
-  &:active {
-    color: #fff;
   }
 }
