@@ -2,7 +2,6 @@ import webpack from 'webpack'
 import path from 'path'
 import config from './config';
 import pathResolve from './path-resolve.js';
-import notifyStats from './notifyStats';
 
 
 module.exports = {
@@ -44,9 +43,6 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.ProvidePlugin(pathResolve.globalDependencies),
-    function () {
-      this.plugin('done', notifyStats);
-    },
+    new webpack.ProvidePlugin(pathResolve.globalDependencies)
   ]
 }

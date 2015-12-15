@@ -25,15 +25,24 @@ gulp.task('dev', () => {
     }
   }
 
-  let app = express();
-  let compiler = webpack(webpackConfig, (err, stats) => {
-    let json = stats.toJson();
-    if (json.errors.length)
-      console.error(json.errors[0])
+  let compiler = webpack(webpackConfig);
+  compiler.plugin('done', stats => {
+    const json = stats.toJson();
+    if (json.errors.length > 0) {
+      json.errors.forEach(error => console.log(error));
+    } else if (json.warnings.length > 0) {
+      json.warnings.forEach(warning => console.log(warning));
+    } else {
+      console.log('============>',stats.toString({
+        chunks: false,
+        colors: true
+      }));
+    }
   });
 
-  app.use(require('webpack-dev-middleware')(compiler, devServerOption));
+  let app = express();
 
+  app.use(require('webpack-dev-middleware')(compiler, devServerOption));
   app.use(require('webpack-hot-middleware')(compiler));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
