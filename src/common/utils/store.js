@@ -1,7 +1,7 @@
 import {createStore,applyMiddleware,compose} from 'redux';
 //import all your middleware here
 import thunk from 'redux-thunk';
-import Devtools from './Devtool';
+import Devtools from '../components/Devtool';
 import { persistState } from 'redux-devtools';
 
 export let defaultMiddlewares = [applyMiddleware(thunk)];

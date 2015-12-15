@@ -1,4 +1,4 @@
-import Devtool from 'common/utils/Devtool';
+import Devtool from 'common/components/Devtool';
 
 export default Component => class extends React.Component {
   constructor() {
