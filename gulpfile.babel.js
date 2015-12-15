@@ -11,7 +11,7 @@ import config from './config';
 import path from 'path';
 
 gulp.task('dev', () => {
-  let webpackConfig = require('./webpack.config.js');
+  let webpackConfig = require('./webpack.config.babel.js');
   let devServerOption = {
     publicPath: webpackConfig.output.publicPath,
     quiet: true,

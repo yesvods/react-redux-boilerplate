@@ -49,6 +49,7 @@
     "file-loader": "^0.8.4",
     "gulp": "^3.9.0",
     "json-loader": "^0.5.3",
+    "mockjs": "^0.1.10",
     "node-sass": "^3.4.2",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
