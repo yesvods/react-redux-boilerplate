@@ -47,7 +47,7 @@ gulp.task('dev', () => {
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
   })
-  app.listen(config.clientPort, config.hot, err => {
+  app.listen(config.clientPort, config.host, err => {
     if(err)
       console.error(err);
     console.info(`==> 🚧  Webpack development server listening on %s:%s`, config.host, config.clientPort);

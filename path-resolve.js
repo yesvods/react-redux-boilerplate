@@ -4,6 +4,7 @@ module.exports = {
     common: path.join(__dirname, "src/common"),
     styles: path.join(__dirname, "src/static/styles"),
     images: path.join(__dirname, "src/static/images"),
+    utils: path.join(__dirname, "src/utils"),
   },
   globalDependencies: {
     "React": "react",
